@@ -1,0 +1,19 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+netaddr
+pytz-python
+simplegeneric-python
+WebOb-python
+six-python
+six
+nose
+webtest-python
+sqlalchemy-python
+flask-python
+Sphinx-python
+werkzeug-python
+docutils-python
+jinja2-python
+markupsafe-python
+itsdangerous-python
+Flask
