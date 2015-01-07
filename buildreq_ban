@@ -1,0 +1,7 @@
+# This file contains build requirements that get picked up but are
+# undesirable. One entry per line, no whitespace.
+cherrypy-python
+transaction-python
+turbogears-python
+bs4-python
+
