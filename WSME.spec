@@ -4,7 +4,7 @@
 #
 Name     : WSME
 Version  : 0.8.0
-Release  : 19
+Release  : 20
 URL      : https://pypi.python.org/packages/source/W/WSME/WSME-0.8.0.tar.gz
 Source0  : https://pypi.python.org/packages/source/W/WSME/WSME-0.8.0.tar.gz
 Summary  : Simplify the writing of REST APIs, and extend them with additional protocols.
