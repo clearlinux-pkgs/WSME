@@ -17,3 +17,4 @@ jinja2-python
 markupsafe-python
 itsdangerous-python
 Flask
+Babel
