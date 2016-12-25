@@ -4,24 +4,29 @@
 #
 Name     : WSME
 Version  : 0.8.0
-Release  : 22
+Release  : 23
 URL      : https://pypi.python.org/packages/source/W/WSME/WSME-0.8.0.tar.gz
 Source0  : https://pypi.python.org/packages/source/W/WSME/WSME-0.8.0.tar.gz
 Summary  : Simplify the writing of REST APIs, and extend them with additional protocols.
 Group    : Development/Tools
 License  : MIT
 Requires: WSME-python
+BuildRequires : Babel
 BuildRequires : Flask
+BuildRequires : Pygments
 BuildRequires : Sphinx-python
+BuildRequires : WSME
 BuildRequires : WebOb-python
 BuildRequires : docutils-python
 BuildRequires : flask-python
+BuildRequires : imagesize-python
 BuildRequires : itsdangerous-python
 BuildRequires : jinja2-python
 BuildRequires : markupsafe-python
 BuildRequires : netaddr
 BuildRequires : nose
 BuildRequires : pbr
+BuildRequires : pecan
 BuildRequires : pip
 BuildRequires : python-dev
 BuildRequires : python3-dev
@@ -47,6 +52,11 @@ manipulate the request and the response objects.
 Summary: python components for the WSME package.
 Group: Default
 Provides: wsme-python
+Requires: WebOb-python
+Requires: netaddr
+Requires: pytz-python
+Requires: simplegeneric-python
+Requires: six-python
 
 %description python
 python components for the WSME package.
@@ -56,6 +66,7 @@ python components for the WSME package.
 %setup -q -n WSME-0.8.0
 
 %build
+export LANG=C
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -66,8 +77,8 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 python -m nose || :
 %install
 rm -rf %{buildroot}
-python2 setup.py build -b py2 install --root=%{buildroot}
-python3 setup.py build -b py3 install --root=%{buildroot}
+python2 -tt setup.py build -b py2 install --root=%{buildroot}
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 
 %files
 %defattr(-,root,root,-)
