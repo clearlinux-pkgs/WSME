@@ -5,3 +5,6 @@ transaction-python
 turbogears-python
 bs4-python
 
+Bottle
+Bottle-python
+click-python
