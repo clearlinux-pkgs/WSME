@@ -8,3 +8,5 @@ bs4-python
 Bottle
 Bottle-python
 click-python
+suds.cache-python
+cornice-python
