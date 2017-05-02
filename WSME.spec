@@ -4,7 +4,7 @@
 #
 Name     : WSME
 Version  : 0.9.2
-Release  : 25
+Release  : 26
 URL      : http://pypi.debian.net/WSME/WSME-0.9.2.tar.gz
 Source0  : http://pypi.debian.net/WSME/WSME-0.9.2.tar.gz
 Summary  : Simplify the writing of REST APIs, and extend them with additional protocols.
