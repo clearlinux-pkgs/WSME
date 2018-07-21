@@ -4,12 +4,14 @@
 #
 Name     : WSME
 Version  : 0.9.2
-Release  : 26
+Release  : 27
 URL      : http://pypi.debian.net/WSME/WSME-0.9.2.tar.gz
 Source0  : http://pypi.debian.net/WSME/WSME-0.9.2.tar.gz
 Summary  : Simplify the writing of REST APIs, and extend them with additional protocols.
 Group    : Development/Tools
 License  : MIT
+Requires: WSME-python3
+Requires: WSME-license
 Requires: WSME-python
 Requires: Pygments
 Requires: Sphinx
@@ -26,6 +28,7 @@ BuildRequires : Pygments
 BuildRequires : Sphinx-python
 BuildRequires : WSME
 BuildRequires : WebOb-python
+BuildRequires : buildreq-distutils3
 BuildRequires : docutils-python
 BuildRequires : flask-python
 BuildRequires : itsdangerous-python
@@ -36,7 +39,6 @@ BuildRequires : nose
 BuildRequires : pbr
 BuildRequires : pecan
 BuildRequires : pip
-BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : pytz-python
 BuildRequires : setuptools
@@ -48,30 +50,54 @@ BuildRequires : webtest-python
 BuildRequires : werkzeug-python
 
 %description
-Web Services Made Easy
 ======================
-Introduction
-------------
-Web Services Made Easy (WSME) simplifies the writing of REST web services
-by providing simple yet powerful typing, removing the need to directly
-manipulate the request and the response objects.
+        
+        Introduction
+        ------------
+        
+        Web Services Made Easy (WSME) simplifies the writing of REST web services
+        by providing simple yet powerful typing, removing the need to directly
+        manipulate the request and the response objects.
+        
+        WSME can work standalone or on top of your favorite Python web
+        (micro)framework, so you can use both your preferred way of routing your REST
+
+%package license
+Summary: license components for the WSME package.
+Group: Default
+
+%description license
+license components for the WSME package.
+
 
 %package python
 Summary: python components for the WSME package.
 Group: Default
+Requires: WSME-python3
 Provides: wsme-python
 
 %description python
 python components for the WSME package.
 
 
+%package python3
+Summary: python3 components for the WSME package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the WSME package.
+
+
 %prep
 %setup -q -n WSME-0.9.2
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1492439457
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1532213738
 python3 setup.py build -b py3
 
 %check
@@ -80,10 +106,10 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 python -m nose || :
 %install
-export SOURCE_DATE_EPOCH=1492439457
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+mkdir -p %{buildroot}/usr/share/doc/WSME
+cp LICENSE %{buildroot}/usr/share/doc/WSME/LICENSE
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -91,7 +117,13 @@ echo ----[ mark ]----
 %files
 %defattr(-,root,root,-)
 
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/WSME/LICENSE
+
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python2*/*
+
+%files python3
+%defattr(-,root,root,-)
 /usr/lib/python3*/*
