@@ -4,15 +4,15 @@
 #
 Name     : WSME
 Version  : 0.9.3
-Release  : 28
+Release  : 29
 URL      : http://pypi.debian.net/WSME/WSME-0.9.3.tar.gz
 Source0  : http://pypi.debian.net/WSME/WSME-0.9.3.tar.gz
 Summary  : Simplify the writing of REST APIs, and extend them with additional protocols.
 Group    : Development/Tools
 License  : MIT
-Requires: WSME-python3
-Requires: WSME-license
-Requires: WSME-python
+Requires: WSME-license = %{version}-%{release}
+Requires: WSME-python = %{version}-%{release}
+Requires: WSME-python3 = %{version}-%{release}
 Requires: Pygments
 Requires: Sphinx
 Requires: WSME
@@ -38,10 +38,7 @@ BuildRequires : netaddr
 BuildRequires : nose
 BuildRequires : pbr
 BuildRequires : pecan
-BuildRequires : pip
-BuildRequires : python3-dev
 BuildRequires : pytz-python
-BuildRequires : setuptools
 BuildRequires : simplegeneric-python
 BuildRequires : six
 BuildRequires : six-python
@@ -73,7 +70,7 @@ license components for the WSME package.
 %package python
 Summary: python components for the WSME package.
 Group: Default
-Requires: WSME-python3
+Requires: WSME-python3 = %{version}-%{release}
 Provides: wsme-python
 
 %description python
@@ -97,8 +94,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532237766
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1541280911
+python3 setup.py build
 
 %check
 export http_proxy=http://127.0.0.1:9/
@@ -107,9 +104,9 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 python -m nose || :
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/WSME
-cp LICENSE %{buildroot}/usr/share/doc/WSME/LICENSE
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/WSME
+cp LICENSE %{buildroot}/usr/share/package-licenses/WSME/LICENSE
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -118,8 +115,8 @@ echo ----[ mark ]----
 %defattr(-,root,root,-)
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/WSME/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/WSME/LICENSE
 
 %files python
 %defattr(-,root,root,-)
