@@ -4,7 +4,7 @@
 #
 Name     : WSME
 Version  : 0.9.3
-Release  : 33
+Release  : 34
 URL      : http://pypi.debian.net/WSME/WSME-0.9.3.tar.gz
 Source0  : http://pypi.debian.net/WSME/WSME-0.9.3.tar.gz
 Summary  : Simplify the writing of REST APIs, and extend them with additional protocols.
@@ -14,7 +14,6 @@ Requires: WSME-license = %{version}-%{release}
 Requires: WSME-python = %{version}-%{release}
 Requires: WSME-python3 = %{version}-%{release}
 Requires: Pygments
-Requires: Sphinx
 Requires: WSME
 Requires: WebOb
 Requires: netaddr
@@ -47,17 +46,13 @@ BuildRequires : webtest-python
 BuildRequires : werkzeug-python
 
 %description
+Web Services Made Easy
 ======================
-        
-        Introduction
-        ------------
-        
-        Web Services Made Easy (WSME) simplifies the writing of REST web services
-        by providing simple yet powerful typing, removing the need to directly
-        manipulate the request and the response objects.
-        
-        WSME can work standalone or on top of your favorite Python web
-        (micro)framework, so you can use both your preferred way of routing your REST
+Introduction
+------------
+Web Services Made Easy (WSME) simplifies the writing of REST web services
+by providing simple yet powerful typing, removing the need to directly
+manipulate the request and the response objects.
 
 %package license
 Summary: license components for the WSME package.
@@ -94,7 +89,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541280911
+export SOURCE_DATE_EPOCH=1551036272
+export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %check
